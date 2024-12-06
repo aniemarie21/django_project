@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Breed Identifier</title>
+
+    <!-- Bootstrap CSS (CDN for convenience) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font for modern style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Premium CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            padding: 50px 0;
+        }
+
+        .overview-container {
+            text-align: center;
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .overview-container h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .overview-container p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .overview-container .btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.1rem;
+            padding: 10px 25px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .overview-container .btn:hover {
+            background-color: #218838;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .btn-upload {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1rem;
+            width: 100%;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            background-color: #0056b3;
+        }
+
+        .file-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-preview {
+            margin-top: 20px;
+        }
+
+        .file-preview h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .file-preview p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Overview Section -->
+    <div class="overview-container">
+        <h1>Pet Breed Identifier</h1>
+        <p>Upload an image of your pet to identify its breed. Our AI-driven system will analyze the image and provide the breed prediction with high accuracy.</p>
+    </div>
+
+    <!-- Upload Form Section -->
+    <div id="upload" class="container">
+        <h2>Upload an Image</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <!-- Image Preview Section -->
+            <div id="imagePreviewContainer" style="display: none;">
+                <div class="file-preview">
+                    <h3>Image Preview</h3>
+                    <img id="imagePreview" src="" alt="Image Preview" class="img-fluid rounded-3 shadow-sm">
+                    <p><strong>Uploaded Image</strong></p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-upload">Upload Image</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (for any Bootstrap features like modals, dropdowns) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Image Preview Logic
+        document.getElementById('id_image').addEventListener('change', function (e) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = event.target.result;
+                document.getElementById('imagePreviewContainer').style.display = 'block';
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    </script>
+</body>
+</html>

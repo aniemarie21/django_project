@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breed Identifier - Result</title>
+
+    <!-- Bootstrap CSS (CDN for convenience) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font for modern style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Premium CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            padding: 50px 0;
+        }
+
+        .overview-container {
+            text-align: center;
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .overview-container h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .overview-container p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .overview-container .btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.1rem;
+            padding: 10px 25px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .overview-container .btn:hover {
+            background-color: #218838;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .breed-info {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .file-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-preview {
+            margin-top: 30px;
+        }
+
+        .back-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 1rem;
+            margin-top: 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Overview Section -->
+    <div class="overview-container">
+        <h1>Pet Breed Identifier</h1>
+        <p>Our app has identified the breed of your pet. View the details below!</p>
+    </div>
+
+    <!-- Result Section -->
+    <div class="container">
+        <h2>Breed Identified</h2>
+
+        <!-- Display the image after classification -->
+        <div class="file-preview">
+            <img src="{{ image.image.url }}" alt="Uploaded Image" class="img-fluid">
+        </div>
+
+        <!-- Display the breed result -->
+        <div class="breed-info">
+            <p>Identified Breed: <strong>{{ breed }}</strong></p>
+        </div>
+
+        <!-- Description of the breed -->
+        <div class="description">
+            <p>This image was analyzed using machine learning to provide the most accurate breed prediction. Find out more about your pet's breed!</p>
+        </div>
+
+        <!-- Button to go back to upload page -->
+        <a href="{% url 'upload_image' %}" class="back-btn">Upload Another Image</a>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (for any Bootstrap features like modals, dropdowns) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
